@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HouseService } from './house.service';
+import { House } from './house';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -57,6 +58,8 @@ export class SmartTableComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
+  houses: House[];
+
   constructor(private houseService: HouseService) { }
 
   ngOnInit() {
@@ -66,7 +69,8 @@ export class SmartTableComponent implements OnInit {
   getHouses(): void {
     this.houseService.getHouses()
     .subscribe(houses => {
-      this.source.load(houses);
+      this.houses = houses;
+      this.source.load(this.houses);
     });
   }
 
@@ -80,12 +84,9 @@ export class SmartTableComponent implements OnInit {
   addHouse(event: any): void {
      this.houseService.addHouse(event.newData)
       .subscribe(house => {
-        this.source.add(house);
-        this.source.getAll().then((data) => console.log(data));
-        this.source
+        this.houses.push(house);
         event.confirm.resolve(event.newData);
       });
-      //event.confirm.resolve(event.newData);
   }
 
   updateHouse(event: any): void {
