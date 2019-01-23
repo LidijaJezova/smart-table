@@ -56,7 +56,7 @@ export class EarningService extends EarningData {
     this.currentValue = Math.random() * 1000;
 
     return Array.from(Array(elementsNumber))
-      .map(item => this.generateRandomLiveChartData());
+      .map(() => this.generateRandomLiveChartData());
   }
 
   generateRandomLiveChartData() {

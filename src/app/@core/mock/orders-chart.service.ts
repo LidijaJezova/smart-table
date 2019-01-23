@@ -142,7 +142,7 @@ export class OrdersChartService extends OrdersChartData {
     const labelsArrayLength = labelsArray.length;
     const step = Math.round(nPoints / labelsArrayLength);
 
-    return Array.from(Array(nPoints)).map((item, index) => {
+    return Array.from(Array(nPoints)).map(( index) => {
       const dataIndex = Math.round(index / step);
 
       return index % step === 0 ? labelsArray[dataIndex] : '';
