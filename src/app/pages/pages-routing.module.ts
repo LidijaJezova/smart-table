@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
@@ -42,9 +41,15 @@ const routes: Routes = [{
   }, {
     path: 'tables',
     loadChildren: './tables/tables.module#TablesModule',
-  }, {
+  }, 
+  {
+    path: 'houses',
+    loadChildren: './houses/houses/houses.module#HousesModule',
+  },
+  {
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
+
   }, {
     path: '',
     redirectTo: 'dashboard',

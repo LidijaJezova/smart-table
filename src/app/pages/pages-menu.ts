@@ -221,6 +221,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Smart Table',
         link: '/pages/tables/smart-table',
       },
+      {
+        title: 'Apartment Table',
+        link: '/pages/tables/apartment-table',
+      },
+      {
+        title: 'Resident Table',
+        link: '/pages/tables/resident-table',
+      },
     ],
   },
   {

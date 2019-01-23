@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>
+    Resident Table
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="deleteResident($event)" (createConfirm)="addResident($event)" (editConfirm)="updateResident($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

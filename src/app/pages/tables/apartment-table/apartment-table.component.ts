@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
-import { HouseService } from './house.service';
+import { ApartmentService } from './apartment.service';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'ngx-smart-table',
-  templateUrl: './smart-table.component.html',
+  selector: 'ngx-apartment-table',
+  templateUrl: './apartment-table.component.html',
   styles: [`
     nb-card {
       transform: translate3d(0, 0, 0);
     }
   `],
 })
-export class SmartTableComponent implements OnInit {
+export class ApartmentTableComponent implements OnInit {
 
   settings = {
     add: {
@@ -36,65 +35,69 @@ export class SmartTableComponent implements OnInit {
         title: 'Number',
         type: 'number',
       },
-      street: {
-        title: 'Street',
+      residentcount: {
+        title: 'Resident count',
         type: 'string',
       },
-      city: {
-        title: 'City',
+      rooms: {
+        title: 'Rooms',
         type: 'string',
       },
-      country: {
-        title: 'Country',
+      floor: {
+        title: 'Floor',
         type: 'string',
       },
-      postindex: {
-        title: 'Post index',
+      fullarea: {
+        title: 'Full area',
         type: 'string',
+      },
+      livingarea: {
+        title: 'Living area',
+        type: 'string',
+      },
+      houseId: {
+        title: 'House ID',
+        type: 'number',
       },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private houseService: HouseService) { }
+  constructor(private apartmentService: ApartmentService) { }
 
   ngOnInit() {
-    this.getHouses();
+    this.getApartments();
   }
 
-  getHouses(): void {
-    this.houseService.getHouses()
-    .subscribe(houses => {
-      this.source.load(houses);
+  getApartments(): void {
+    this.apartmentService.getApartments()
+      .subscribe(apartments => {
+        this.source.load(apartments);
+        console.log(apartments);
     });
   }
 
-  deleteHouse(event: any): void {
-    this.houseService.removeHouseById(event.data.id)
+  deleteApartment(event: any): void {
+    this.apartmentService.removeApartmentById(event.data.id)
       .subscribe(() => {
         this.source.remove(event.data);
-    });
+      });
   }
 
-  addHouse(event: any): void {
-     this.houseService.addHouse(event.newData)
-      .subscribe(house => {
-        this.source.add(house);
-        this.source.getAll().then((data) => console.log(data));
-        this.source
+  addApartment(event: any): void {
+    this.apartmentService.addApartment(event.newData)
+      .subscribe(x => {
+        this.source.add(x);
         event.confirm.resolve(event.newData);
       });
-      //event.confirm.resolve(event.newData);
   }
 
-  updateHouse(event: any): void {
-    console.log(event.data.id);
-    this.houseService.updateHouse(event.newData)
+  updateApartment(event: any): void {
+    this.apartmentService.updateApartment(event.newData)
       .subscribe(() => {
         this.source.update(event.data, event.newData);
+        event.confirm.resolve(event.newData);
       });
-      event.confirm.resolve(event.newData);
   }
-
 }
